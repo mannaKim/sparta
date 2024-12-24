@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방명록</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script type="module">
+        // Firebase SDK 라이브러리 가져오기
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+
+        // Firebase 구성 정보 설정
+        const firebaseConfig = {
+            apiKey: "AIzaSyBkQICiWSjg5HOoTbRABf_3vKGWiRuXjXk",
+            authDomain: "sparta-99127.firebaseapp.com",
+            projectId: "sparta-99127",
+            storageBucket: "sparta-99127.firebasestorage.app",
+            messagingSenderId: "21636541090",
+            appId: "1:21636541090:web:53ae33565c0f1bed2745fb",
+            measurementId: "G-J0J83TFTXV"
+        };
+
+
+        // Firebase 인스턴스 초기화
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        $("#btn_posting").click(async function () {
+            let username = $('#username').val();
+            let password = $('#password').val();
+            let message = $('#message').val();
+
+            let doc = {
+                'username': username,
+                'password': password,
+                'message': message
+            };
+            await addDoc(collection(db, "postings"), doc);
+
+            window.location.reload();
+        })
+        let boolean = true;
+        $('#btn_toggle').click(function () {
+
+            $('#postingbox').toggle();
+            if (boolean == true) {
+                $('#btn_toggle').text('펼치기');
+                boolean = false;
+            } else {
+                $('#btn_toggle').text('접기');
+                boolean = true;
+            }
+        })
+
+        let docs = await getDocs(collection(db, "postings"));
+        docs.forEach((doc) => {
+            let row = doc.data();
+            console.log(row);
+            console.log(row['username']);
+            console.log(row['password']);
+            console.log(row['message']);
+        });
+
+    </script>
+</head>
+
+
+<body>
+    <div class="">
+        <div>
+            <h1 class="">당신의 흔적을 남길 장소입니다</h1>
+            <p class="">하고싶은 말을 자유롭게 남겨주세요!</p>
+            <button id="btn_toggle">접기</button>
+        </div>
+
+
+        <div id="postingbox">
+            <div>
+                <label for="username">이름:</label>
+                <input type="text" id="username" name="username" placeholder="이름을 입력하세요">
+            </div>
+            <div>
+                <label for="password">비밀번호:</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div>
+                <label for="message">메시지:</label>
+                <textarea id="message" name="message" rows="5" cols="50" placeholder="여기에 메시지를 작성하세요"></textarea>
+            </div>
+            <button id="btn_posting">남기기</button>
+        </div>
+
+    </div>
+</body>
+
+</html>
