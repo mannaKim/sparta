@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=Roboto+Slab:wght@100..900&display=swap');
+
+        * {
+            .do-hyeon-regular {
+                font-family: "Do Hyeon", serif;
+                font-weight: 400;
+                font-style: normal;
+            }
+        }
+
+        .membertitle {
+            height: 150px;
+            background-color: cornflowerblue;
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .mb-content {
+            margin-top: 30px;
+        }
+
+        .btns {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 30px;
+        }
+
+        .space {
+            width: 10px;
+            height: auto;
+            display: inline-block;
+        }
+
+        .img-fluid {
+            width: 450px;
+            height: 300px;
+            border: 2px solid;
+            border-radius: 7px;
+
+            margin-top: 30px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .btnedit {
+            width: 150px;
+            height: 50px;
+            background-color: transparent;
+            color: black;
+            border: 1px solid;
+            border-radius: 5px;
+            align-items: center;
+
+            margin-top: 20px;
+        }
+
+        .btndelete {
+            width: 150px;
+            height: 50px;
+            background-color: transparent;
+            color: black;
+            border: 1px solid;
+            border-radius: 5px;
+            align-items: center;
+
+            margin-top: 20px;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="membertitle">
+        <h1>000을 소개합니다!</h1>
+    </div>
+    <div>
+        <div class="container">
+            <div>
+                <img src="https://mblogthumb-phinf.pstatic.net/MjAyMDAyMTBfODAg/MDAxNTgxMzA0MTE3ODMy.ACRLtB9v5NH-I2qjWrwiXLb7TeUiG442cJmcdzVum7cg.eTLpNg_n0rAS5sWOsofRrvBy0qZk_QcWSfUiIagTfd8g.JPEG.lattepain/1581304118739.jpg?type=w800"
+                    class="img-fluid" alt="프로필">
+            </div>
+
+            <div class="mb-content">
+                <p>이름 : </p>
+                <p>mbti : </p>
+                <p>블로그 : </p>
+                <p>멤버 소개 : </p>
+            </div>
+        </div>
+        <div class="btns">
+            <button class="btnedit">수정</button>
+            <div class="space">
+            </div>
+            <button class="btndelete">삭제</button>
+        </div>
+    </div>
+</body>
+
+</html>
