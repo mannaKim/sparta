@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Members Introduction</title>
+        <!-- jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <!-- bootstrap -->
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -129,5 +132,61 @@
                 <button class="btndelete">삭제</button>
             </div>
         </div>
+
+        <!-- bootstrap -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"
+        ></script>
+        <script type="module">
+            // Firebase SDK 라이브러리 가져오기
+            import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
+            import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+            import { collection, addDoc } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+            import { getDocs } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+
+            // Firebase 구성 정보 설정
+            const firebaseConfig = {
+                apiKey: 'AIzaSyBkQICiWSjg5HOoTbRABf_3vKGWiRuXjXk',
+                authDomain: 'sparta-99127.firebaseapp.com',
+                projectId: 'sparta-99127',
+                storageBucket: 'sparta-99127.firebasestorage.app',
+                messagingSenderId: '21636541090',
+                appId: '1:21636541090:web:53ae33565c0f1bed2745fb',
+                measurementId: 'G-J0J83TFTXV',
+            };
+
+            // Firebase 인스턴스 초기화
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore(app);
+
+            function getQueryParams() {
+                const params = new URLSearchParams(window.location.search);
+                return {
+                    name: params.get('name'),
+                    intro: params.get('intro'),
+                    mbti: params.get('mbti'),
+                    merit: params.get('merit'),
+                    profileImg: params.get('profileImg')
+                };
+            }
+
+            // 페이지 로드 후 데이터 출력
+            window.onload = function () {
+                const { name, intro, mbti, merit, profileImg } = getQueryParams();
+
+                // HTML 요소에 데이터 삽입
+                document.querySelector('.membertitle h1').textContent = `${name}을 소개합니다!`;
+                document.querySelector('.img-fluid').src = profileImg;
+                document.querySelector('.img-fluid').alt = `${name} 프로필 이미지`;
+                document.querySelector('.mb-content').innerHTML = `
+                    <p>이름 : ${name}</p>
+                    <p>한줄 소개 : ${intro}</p>
+                    <p>MBTI : ${mbti}</p>
+                    <p>자신의 장점 : ${merit}</p>
+                `;
+            };
+        </script>
     </body>
 </html>
