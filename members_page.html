@@ -142,9 +142,7 @@
         <script type="module">
             // Firebase SDK 라이브러리 가져오기
             import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-            import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
-            import { collection, addDoc } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
-            import { getDocs } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+            import { getFirestore, doc, deleteDoc } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 
             // Firebase 구성 정보 설정
             const firebaseConfig = {
@@ -161,9 +159,11 @@
             const app = initializeApp(firebaseConfig);
             const db = getFirestore(app);
 
+            // URL 파라미터 가져오기 함수
             function getQueryParams() {
                 const params = new URLSearchParams(window.location.search);
                 return {
+                    id: params.get('id'),
                     name: params.get('name'),
                     intro: params.get('intro'),
                     mbti: params.get('mbti'),
@@ -174,7 +174,7 @@
 
             // 페이지 로드 후 데이터 출력
             window.onload = function () {
-                const { name, intro, mbti, merit, profileImg } = getQueryParams();
+                const { id, name, intro, mbti, merit, profileImg } = getQueryParams();
 
                 // HTML 요소에 데이터 삽입
                 document.querySelector('.membertitle h1').textContent = `${name}을 소개합니다!`;
@@ -186,7 +186,28 @@
                     <p>MBTI : ${mbti}</p>
                     <p>자신의 장점 : ${merit}</p>
                 `;
+
+                // 삭제 버튼에 문서 ID 추가
+                document.getElementById('deleteBtn').setAttribute('data-id', id);
             };
+
+            // 삭제 버튼 클릭 이벤트
+            document.getElementById('deleteBtn').addEventListener('click', async function () {
+                const memberId = this.getAttribute('data-id'); // Firebase 문서 ID 가져오기
+
+                if (confirm('정말로 삭제하시겠습니까?')) {
+                    try {
+                        // Firebase에서 해당 멤버 삭제
+                        await deleteDoc(doc(db, 'members', memberId));
+
+                        alert('삭제되었습니다.');
+                        window.location.href = 'main.html'; // 메인 페이지로 리다이렉트
+                    } catch (error) {
+                        console.error('삭제 중 오류 발생:', error);
+                        alert('삭제에 실패했습니다.');
+                    }
+                }
+            });
         </script>
     </body>
 </html>
