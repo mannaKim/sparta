@@ -94,11 +94,11 @@
                     </div>
                 </div>
                 <div class="btns">
-                    <button type="button" class="btn btn-lg btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+                    <button type="button" id="editBtn" class="btn btn-lg btn-outline-primary">
                         수정하기
                     </button>
                     <div class="space"></div>
-                    <button type="button" class="btn btn-lg btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+                    <button type="button" id="deleteBtn" class="btn btn-lg btn-outline-primary">
                         삭제하기
                     </button>
                 </div>
@@ -273,7 +273,7 @@
                         await deleteDoc(doc(db, 'members', memberId));
 
                         alert('삭제되었습니다.');
-                        window.location.href = 'main.html'; // 메인 페이지로 리다이렉트
+                        window.location.href = 'index.html'; // 메인 페이지로 리다이렉트
                     } catch (error) {
                         console.error('삭제 중 오류 발생:', error);
                         alert('삭제에 실패했습니다.');
