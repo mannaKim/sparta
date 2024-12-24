@@ -24,30 +24,11 @@
                 width: 1200px;
                 margin: 0 auto;
                 text-align: center;
-            }
-
-            .membertitle {
-                height: 150px;
-                color: white;
-                background-color: blue;
-
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
+                margin-top: 100px;
             }
 
             .mb-content {
-                margin-top: 30px;
-            }
-
-            .btns {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-
+                margin-top: 50px;
                 margin-bottom: 30px;
             }
 
@@ -63,7 +44,6 @@
                 border: 2px solid;
                 border-radius: 7px;
 
-                margin-top: 30px;
             }
 
             .container {
@@ -72,28 +52,8 @@
                 flex-direction: column;
             }
 
-            .btnedit {
-                width: 150px;
-                height: 50px;
-                background-color: transparent;
-                color: black;
-                border: 1px solid;
-                border-radius: 5px;
-                align-items: center;
-
-                margin-top: 20px;
-            }
-
-            .btndelete {
-                width: 150px;
-                height: 50px;
-                background-color: transparent;
-                color: black;
-                border: 1px solid;
-                border-radius: 5px;
-                align-items: center;
-
-                margin-top: 20px;
+            .btns {
+                margin-bottom: 30px;
             }
 
             body {
@@ -104,6 +64,7 @@
                 margin: 0;
                 flex-direction: column;
             }
+
         </style>
     </head>
 
@@ -133,9 +94,13 @@
                     </div>
                 </div>
                 <div class="btns">
-                    <button class="btnedit" id="editBtn">수정</button>
+                    <button type="button" class="btn btn-lg btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+                        수정하기
+                    </button>
                     <div class="space"></div>
-                    <button class="btndelete" id="deleteBtn">삭제</button>
+                    <button type="button" class="btn btn-lg btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+                        삭제하기
+                    </button>
                 </div>
             </div>
         </div>
