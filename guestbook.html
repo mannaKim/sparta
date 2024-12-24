@@ -85,11 +85,67 @@
                 <h5 class="card-title">${username}</h5>
                 <p class="card-text">${message}</p>
                 <input class="cardId" type="hidden" value="${id}">
-                <a href="#" class="btn btn-primary cardBtn cardUpdateBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">수정하기</a>
-                <a href="#" class="btn btn-primary cardBtn cardDeleteBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">삭제하기</a>   
+                <a href="#" class="btn btn-primary cardBtn cardUpdateBtn" data-bs-toggle="modal" data-bs-target="#passwordModal" data-bs-whatever="@mdo">수정하기</a>
+                <a href="#" class="btn btn-primary cardBtn cardDeleteBtn" data-bs-toggle="modal" data-bs-target="#passwordModal" data-bs-whatever="@mdo">삭제하기</a>   
             </div>`;
             $('#guestBook').append(temp_html);
         });
+
+        // 수정/삭제 버튼 클릭
+        $('.cardBtn').on('click', async function () {
+            let type;
+            if ($(this).hasClass("cardUpdateBtn")) type = 'update';
+            else if ($(this).hasClass("cardDeleteBtn")) type = 'delete';
+
+            let docId = $(this).siblings('.cardId').val();
+
+            // 비밀번호 확인
+            $('#checkPasswordBtn').on('click', async function () {
+                let chkPw = $('#chkPw').val();
+
+                const docRef = doc(db, "postings", docId);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.data().password == chkPw) {
+                    // 수정인 경우
+                    if (type == 'update') {
+                        $('#editUsername').val(docSnap.data().username);
+                        $('#editMessage').val(docSnap.data().message);
+                        cardUpdate(docId);
+                    }
+                    // 삭제인 경우 
+                    else if (type == 'delete') {
+                        cardDelete(docId);
+                    }
+                }
+                else {
+                    alert("비밀번호가 틀립니다.");
+                    return;
+                }
+            });
+        });
+
+        // 빙명록 수정
+        function cardUpdate(docId) {
+            $('#editModal').modal('show');
+            $('#saveMessageBtn').on('click', async function () {
+                let editMessage = $('#editMessage').val();
+                const docRef = doc(db, "postings", docId);
+                await updateDoc(docRef, {
+                    message: editMessage, 
+                });
+                alert('수정 완료');
+                window.location.reload();
+            });
+        }
+
+        // 방명록 삭제
+        async function cardDelete(docId) {
+            const docRef = doc(db, "postings", docId);
+            await deleteDoc(docRef);
+            alert('삭제 완료');
+            window.location.reload();
+        }
     </script>
 </head>
 
@@ -123,6 +179,56 @@
         <div class="">
             <div id="guestBook" class="card w-75 mb-3">
 
+            </div>
+        </div>
+    </div>
+    <!-- 비밀번호 입력 modal -->
+    <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">비밀번호를 입력하세요.</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="chkPw" class="col-form-label">비밀번호 : </label>
+                            <input type="password" class="form-control" id="chkPw">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    <button id="checkPasswordBtn" type="button" class="btn btn-primary">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 수정 modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">방명록을 수정하세요.</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="editUsername" class="col-form-label">이름:</label>
+                            <input type="text" class="form-control" id="editUsername" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editMessage" class="col-form-label">메시지:</label>
+                            <textarea id="editMessage" class="form-control" rows="5" cols="50"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    <button id="saveMessageBtn" type="button" class="btn btn-primary">저장하기</button>
+                </div>
             </div>
         </div>
     </div>
