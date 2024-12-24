@@ -222,30 +222,32 @@
             let docs = await getDocs(collection(db, 'members'));
             docs.forEach((doc) => {
                 let row = doc.data();
-
+                let name = row['name'];
                 let profileImg = row['profileImg'];
                 let intro = row['intro'];
                 let mbti = row['mbti'];
                 let merit = row['merit'];
 
                 let temp_html = `
-
-          <div class="col">
-            <div class="card shadow-sm">
-              <img
-                class="bd-placeholder-img card-img-top"
-                width="100%"
-                height="225px"
-                src="${profileImg}"
-              >
-              </svg>
-              <div class="card-body">
-                <p class="card-text">
-                  ${intro}
-                </p>
-              </div>
-            </div>
-          </div>`;
+                  <div class="col">
+                    <a href="members_page.html?name=${encodeURIComponent(name)}&intro=${encodeURIComponent(intro)}&mbti=${encodeURIComponent(mbti)}&merit=${encodeURIComponent(merit)}&profileImg=${encodeURIComponent(profileImg)}">
+                      <div class="card shadow-sm">
+                        <img
+                          class="bd-placeholder-img card-img-top"
+                          width="100%"
+                          height="225px"
+                          src="${profileImg}"
+                        >
+                        </svg>
+                        <div class="card-body">
+                          <p class="card-text">
+                              ${intro}
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                `;
                 $('#cards').append(temp_html);
             });
         </script>
