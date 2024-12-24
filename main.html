@@ -220,8 +220,10 @@
 
             // 멤버 카드 read
             let docs = await getDocs(collection(db, 'members'));
+            $('#cards').empty(); // 기존 데이터를 초기화
             docs.forEach((doc) => {
                 let row = doc.data();
+                let id = doc.id; // 문서 ID
                 let name = row['name'];
                 let profileImg = row['profileImg'];
                 let intro = row['intro'];
@@ -230,7 +232,7 @@
 
                 let temp_html = `
                   <div class="col">
-                    <a href="members_page.html?name=${encodeURIComponent(name)}&intro=${encodeURIComponent(intro)}&mbti=${encodeURIComponent(mbti)}&merit=${encodeURIComponent(merit)}&profileImg=${encodeURIComponent(profileImg)}">
+                    <a href="members_page.html?id=${id}&name=${encodeURIComponent(name)}&intro=${encodeURIComponent(intro)}&mbti=${encodeURIComponent(mbti)}&merit=${encodeURIComponent(merit)}&profileImg=${encodeURIComponent(profileImg)}">
                       <div class="card shadow-sm">
                         <img
                           class="bd-placeholder-img card-img-top"
