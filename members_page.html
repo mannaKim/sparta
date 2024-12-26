@@ -160,6 +160,10 @@
                                 <label for="message-text" class="col-form-label">자신의 장점:</label>
                                 <textarea class="form-control" id="merit" required></textarea>
                             </div>
+                            <div class="mb-3">
+                                <label for="password" class="col-form-label">비밀번호:</label>
+                                <input type="password" id="password" class="form-control" required />
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -247,6 +251,9 @@
                         document.getElementById('mbti').value = data.mbti;
                         document.getElementById('merit').value = data.merit;
 
+                        // 비밀번호 필드 초기화
+                        document.getElementById('password').value = '';
+
                         // 모달 띄우기
                         const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
                         myModal.show();
@@ -254,6 +261,14 @@
                         // 기존 이벤트 리스너 제거 후 등록
                         document.getElementById('saveBtn').replaceWith(document.getElementById('saveBtn').cloneNode(true));
                         document.getElementById('saveBtn').addEventListener('click', async function () {
+                            const inputPassword = document.getElementById('password').value;
+
+                            // 비밀번호 확인
+                            if (data.password !== inputPassword) {
+                                alert('비밀번호가 일치하지 않습니다.');
+                                return;
+                            }
+
                             const updatedName = document.getElementById('name').value;
                             const updatedProfileImg = document.getElementById('profileImg').value;
                             const updatedIntro = document.getElementById('intro').value;
