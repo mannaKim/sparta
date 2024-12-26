@@ -258,8 +258,8 @@ window.onload = function () {
 
   // HTML 요소에 데이터 삽입
   document.querySelector(
-    ".pricing-header p"
-  ).textContent = `${mbti}가 전원 IS로 시작하는 8조의 ${name}을(를) 소개합니다!🤓`;
+    ".member-intro p"
+  ).textContent = `MBTI가 전원 IS로 시작하는 8조의 ${name}을(를) 소개합니다!🤓`;
   document.querySelector(".img-fluid").src = profileImg;
   document.querySelector(".img-fluid").alt = `${name} 프로필 이미지`;
   document.querySelector(".mb-content").innerHTML = `
