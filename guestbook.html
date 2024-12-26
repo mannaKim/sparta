@@ -45,15 +45,20 @@
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
 
+
+      // 방명록 남기기 버튼 클릭 이벤트
       $("#btn_posting").click(async function () {
         let username = $("#username").val();
         let password = $("#password").val();
         let message = $("#message").val();
+        let createdAt = new Date();
+        
 
         let doc = {
           username: username,
           password: password,
           message: message,
+          createdAt: createdAt
         };
         await addDoc(collection(db, "postings"), doc);
 
@@ -64,7 +69,7 @@
       let boolean = true;
       $("#btn_toggle").click(function () {
         $("#postingbox").toggle();
-        if (boolean == true) {
+        if (boolean) {
           $("#btn_toggle").text("펼치기");
           boolean = false;
         } else {
