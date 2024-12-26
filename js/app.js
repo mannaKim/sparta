@@ -1,3 +1,8 @@
+// ================================================
+// ================ firebase ====================
+// ================================================
+
+
 // Firebase SDK 라이브러리 가져오기
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
 import {
@@ -27,6 +32,13 @@ const firebaseConfig = {
 // Firebase 인스턴스 초기화
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+
+
+// ================================================
+// ================ 방명록 시작 ====================
+// ================================================
+
 
 // jQuery로 DOM이 준비되었을 때 실행
 $(document).ready(async () => {
