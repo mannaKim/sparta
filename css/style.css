@@ -29,6 +29,9 @@ img {
 }
 
 /* ===== team_section ===== */
+.team_section .card-body {
+  height: 240px;
+}
 
 /* ===== member_section ===== */
 .member_section img {
