@@ -14,6 +14,7 @@ public class Calculator {
             case "-" -> (double) (firstNumber - secondNumber);
             case "*" -> (double) (firstNumber * secondNumber);
             case "/" -> (double) (firstNumber / secondNumber);
+            case "%" -> (double) (firstNumber % secondNumber);
             default -> 0.0;
         };
     }
