@@ -27,8 +27,11 @@ public class App {
                 if ((operator == '/' || operator == '➗') && num2 == 0) {
                     System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
                 }
-                calculator.setResult(calculator.calculate(num1, num2, operator));
-                System.out.println("결과: " + calculator.getResult());
+                else {
+                    calculator.setResult(calculator.calculate(num1, num2, operator));
+                    System.out.println("결과: " + calculator.getResult());
+                    calculator.removeResult();
+                }
             }
             else {
                 System.out.println("사칙연산 기호가 적절하지 않습니다.");
