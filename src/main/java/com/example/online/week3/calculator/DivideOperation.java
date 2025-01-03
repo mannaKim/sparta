@@ -1,4 +1,4 @@
-package com.example.online.calculator;
+package com.example.online.week3.calculator;
 
 public class DivideOperation extends AbstractOperation {
     @Override
