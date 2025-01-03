@@ -4,10 +4,12 @@ public class Main {
     public static void main(String[] args) {
         boolean calculateEnded = false;
         // 구현 2.
-
-        Calculator calculator  = new Calculator(new AddOperation());
-        //System.out.println(calculator.calculate(10, 20));
-        calculator.setOperation(new MultiplyOperation());
-        //System.out.println(calculator.calculate(10,20));
+        while (!calculateEnded) {
+            try {
+                calculateEnded = CalculatorApp.start();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
