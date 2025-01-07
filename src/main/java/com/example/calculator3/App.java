@@ -17,15 +17,14 @@ public class App {
             // 입력 받은것이 숫자가 맞는지 확인
             String userInput;
             Number[] numbers = new Number[2];
-            for (int i=0; i<2; i++) {
-                System.out.print((i+1) + " 번째 숫자를 입력하세요: ");
+            for (int i = 0; i < 2; i++) {
+                System.out.print((i + 1) + " 번째 숫자를 입력하세요: ");
                 userInput = sc.next().trim();
                 try {
                     numbers[i] = Double.parseDouble(userInput);
                 } catch (NumberFormatException e) {
                     System.out.println(userInput + "은 숫자가 아닙니다. 숫자를 다시 입력하세요.");
                     --i;
-                    //continue;
                 }
             }
 
@@ -34,16 +33,10 @@ public class App {
             try {
                 char operator = sc.next().trim().charAt(0);
                 if (OperatorType.isValidOperator(operator)) {
-                    if (OperatorType.isDivisionOperator(operator) && numbers[1].equals(0)) {
-                        System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
-                    }
-                    else {
-                        calculator.setResult(calculator.calculate(numbers[0], numbers[1], operator));
-                        System.out.println("결과: " + calculator.getResult());
-                        calculator.removeResult();
-                    }
-                }
-                else {
+                    calculator.setResults(calculator.calculate(numbers[0], numbers[1], operator));
+                    System.out.println("결과: " + calculator.getResults());
+                    calculator.filterResultsGreaterThan(numbers);
+                } else {
                     System.out.println("사칙연산 기호가 적절하지 않습니다.");
                 }
             } catch (Exception e) {
