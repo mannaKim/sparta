@@ -3,7 +3,7 @@ package com.example.calculator3;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) throws BadInputException {
+    public static void main(String[] args) {
         /* ArithmeticCalculator 인스턴스 생성 */
         ArithmeticCalculator<Number> calculator = new ArithmeticCalculator<>();
 
@@ -38,12 +38,12 @@ public class App {
 
                     // 입력받은 사칙연산 기호가 올바른지 판별
                     if (!OperatorType.isValidOperator(operator)) {
-                        throw new BadInputException("사칙연산 기호가 적절하지 않습니다.");
+                        throw new IllegalArgumentException("사칙연산 기호가 적절하지 않습니다.");
                     }
 
                     // 나눗셈 연산이 유효한지 판별
                     if (!OperatorType.isValidDivision(operator, numbers[1])) {
-                        throw new BadInputException("나눗셈의 분모(두 번째 숫자)가 0일 수 없습니다.");
+                        throw new IllegalArgumentException("나눗셈의 분모(두 번째 숫자)가 0일 수 없습니다.");
                     }
 
                     calculator.setOperator(operator);
@@ -56,15 +56,13 @@ public class App {
                 }
             }
 
-            calculator.setResults(calculator.calculate(numbers[0], numbers[1], calculator.getOperator()));
+            calculator.setResults(calculator.calculate(numbers[0], numbers[1]));
             System.out.println("결과: " + calculator.getResults());
             calculator.filterResultsGreaterThan(numbers);
 
             // 반복의 종료를 알려주는 “exit” 문자열을 입력하기 전까지 무한으로 계산을 진행
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             answer = sc.next();
-            System.out.println("**************************************************");
-            System.out.println("**************************************************");
             System.out.println("**************************************************");
         }
     }

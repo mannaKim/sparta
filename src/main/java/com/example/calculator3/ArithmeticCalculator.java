@@ -1,5 +1,7 @@
 package com.example.calculator3;
 
+import com.example.online.week4.BadInputException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,14 +14,9 @@ public class ArithmeticCalculator <T extends Number> {
 
     // 사칙연산을 수행한 후, 결과값을 반환하는 메서드 구현
     // 매개변수 타입은 제네릭, 반환은 항상 double
-    public double calculate(T num1, T num2, char op) {
-        return switch (op) {
-            case '➕', '+' -> OperatorType.ADD.operate(num1, num2);
-            case '➖', '-' -> OperatorType.SUBTRACT.operate(num1, num2);
-            case '✖', '*' -> OperatorType.MULTIPLY.operate(num1, num2);
-            case '➗', '/' -> OperatorType.DIVIDE.operate(num1, num2);
-            default -> 0;
-        };
+    public double calculate(T num1, T num2) {
+        OperatorType operatorType = OperatorType.selectOperator(this.operator);
+        return operatorType.operate(num1, num2);
     }
 
     /* Getter 메서드 구현 */

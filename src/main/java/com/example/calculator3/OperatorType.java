@@ -1,5 +1,7 @@
 package com.example.calculator3;
 
+import com.example.online.week4.BadInputException;
+
 public enum OperatorType {
     ADD('+', '➕') {
         @Override
@@ -54,6 +56,16 @@ public enum OperatorType {
             return number.doubleValue() != 0;
         }
         return true;
+    }
+
+    // 어떤 연산자를 사용하는지 반환해주는 메서드
+    public static OperatorType selectOperator(char input) {
+        for (OperatorType op : OperatorType.values()) {
+            if (op.operationSymbol == input || op.operationEmoji == input) {
+                return op;
+            }
+        }
+        throw new IllegalArgumentException("사칙연산 기호가 적절하지 않습니다.");
     }
 
     // 매개변수는 제네릭 타입(Number 또는 그 하위 클래스들)으로 받고,
