@@ -22,12 +22,7 @@ public enum OperatorType {
     DIVIDE('/', '➗') {
         @Override
         public <T extends Number> double operate(T num1, T num2) {
-//            try {
-                return num1.doubleValue() / num2.doubleValue();
-//            } catch (ArithmeticException e) {
-//                System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
-//            }
-//            return 0;
+            return num1.doubleValue() / num2.doubleValue();
         }
     };
 
@@ -51,14 +46,15 @@ public enum OperatorType {
         return false;
     }
 
-    // 나눗셈 연산인지 판별
-    /*public static boolean isDivisionOperator(char input) {
-        if (OperatorType.DIVIDE.operationSymbol == input
-                || OperatorType.DIVIDE.operationEmoji == input) {
-            return true;
+    // 나눗셈 연산이 유효한지 판별
+    // 가능한 연산일 경우 : true / 불가능한 연산일 경우 : false
+    public static boolean isValidDivision(char operator, Number number) {
+        if (OperatorType.DIVIDE.operationSymbol == operator
+                || OperatorType.DIVIDE.operationEmoji == operator) {
+            return number.doubleValue() != 0;
         }
-        return false;
-    }*/
+        return true;
+    }
 
     // 매개변수는 제네릭 타입(Number 또는 그 하위 클래스들)으로 받고,
     // 반환 타입을 항상 double 타입으로 고정: 일반적인 산술 결과가 실수이기 때문에
