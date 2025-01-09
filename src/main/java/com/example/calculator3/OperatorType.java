@@ -1,7 +1,5 @@
 package com.example.calculator3;
 
-import com.example.online.week4.BadInputException;
-
 public enum OperatorType {
     ADD('+', '➕') {
         @Override

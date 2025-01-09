@@ -56,8 +56,13 @@ public class App {
                 }
             }
 
-            calculator.setResults(calculator.calculate(numbers[0], numbers[1]));
-            System.out.println("결과: " + calculator.getResults());
+            calculator.setResult(calculator.calculate(numbers[0], numbers[1]));
+            System.out.println("결과: " + calculator.getResult());
+
+            // results 리스트에 요소가 5개 이상이 되면, removeResult 메서드 실행하여 마지막 요소 삭제
+            if (calculator.getResultsSize() > 5) calculator.removeResult();
+            
+            // results 리스트에 저장된 결과 중 현재 연산에서 입력받은 값보다 큰 결과값 출력
             calculator.filterResultsGreaterThan(numbers);
 
             // 반복의 종료를 알려주는 “exit” 문자열을 입력하기 전까지 무한으로 계산을 진행

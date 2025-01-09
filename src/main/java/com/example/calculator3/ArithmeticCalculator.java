@@ -1,7 +1,5 @@
 package com.example.calculator3;
 
-import com.example.online.week4.BadInputException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,15 +18,18 @@ public class ArithmeticCalculator <T extends Number> {
     }
 
     /* Getter 메서드 구현 */
-    public T getResults() {
+    public T getResult() {
         return this.results.get(results.size() - 1);  // 마지막 요소 리턴
     }
     public char getOperator() {
         return this.operator;
     }
+    public int getResultsSize() {
+        return this.results.size();
+    }
 
     /* Setter 메서드 구현 */
-    public void setResults(T answer) {
+    public void setResult(T answer) {
         this.results.add(answer);
     }
     public void setOperator(char operator) {
@@ -38,7 +39,7 @@ public class ArithmeticCalculator <T extends Number> {
     /* Calculator 클래스에 저장된 연산 결과들 중 가장 먼저 저장된 데이터를 삭제하는 기능을 가진 메서드를 구현한 후
      App 클래스의 main 메서드에 삭제 메서드가 활용될 수 있도록 수정 */
     public void removeResult() {
-        this.results.remove(0);
+        if (!this.results.isEmpty()) this.results.remove(0);
     }
 
     /* 저장된 연산 결과들 중 Scanner로 입력받은 값보다 큰 결과값 들을 출력
