@@ -1,4 +1,4 @@
-package com.example.online.week4;
+package com.example.online.week4.calculator;
 
 public class Main {
     public static void main(String[] args) {
