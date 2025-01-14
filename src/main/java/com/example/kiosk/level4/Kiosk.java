@@ -8,12 +8,12 @@ import java.util.Scanner;
  * 설명: 키오스크 프로그램의 메뉴를 관리하고 사용자 입력을 처리하는 클래스입니다.
  */
 public class Kiosk {
-    // MenuItem을 관리하는 리스트가 필드로 존재합니다.
-    public List<MenuItem> menuItems;
-
-    // List<MenuItem> menuItems 는 Kiosk 클래스 생성자를 통해 값을 할당합니다.
-    public Kiosk (List<MenuItem> items) {
-        this.menuItems = items;
+    // Menu를 관리하는 리스트 필드
+    public List<Menu> menuList;
+    
+    // 생성자를 통해 List<Menu> menuList 값 할당
+    public Kiosk(List<Menu> menuList) {
+        this.menuList = menuList;
     }
 
     // main 함수에서 관리하던 입력과 반복문 로직은 이제 start 함수를 만들어 관리합니다.
@@ -21,33 +21,20 @@ public class Kiosk {
         // Scanner 선언
         Scanner sc = new Scanner(System.in);
 
+        // 반복문 시작
         while (true) {
-            MenuItem.printMenuList(this.menuItems);
+            // List와 Menu 클래스 활용하여 상위 카테고리 메뉴 출력
 
-            // 숫자를 입력 받기
-            String selectedMenu = sc.next();
-            try {
-                // 반복문을 이용해서 특정 번호가 입력되면 프로그램을 종료합니다.
-                if ("0".equals(selectedMenu)) break;
+            // 숫자 입력 받기
 
-                // 입력받은 매뉴를 정수로 변환
-                int menuNumber = Integer.parseInt(selectedMenu);
+            // 입력 받은 숫자가 올바르다면 인덱스로 활용하여 List에 접근하기
+            // List<Menu>에 인덱스로 접근하면 Menu만 추출할 수 있겠죠?
 
-                // 메뉴 리스트에 있는 번호라면 해당 메뉴의 이름,가격,설명을 출력
-                if (menuNumber > 0 && menuNumber <= this.menuItems.size()) {
-                    this.menuItems.get(menuNumber - 1).printMenu();
-                } else { // 아니라면 IllegalArgumentException 예외 발생
-                    throw new IllegalArgumentException("입력 가능한 숫자는 0~" + this.menuItems.size() + "입니다.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("\"" + selectedMenu + "\"은 숫자가 아닙니다. 숫자를 다시 입력하세요.");
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            } catch (Exception e) {
-                System.out.println("알 수 없는 오류가 발생했습니다. : " + e.getMessage());
-            }
-            System.out.println("************************************************************************************");
+            // Menu가 가진 List<MenuItem>을 반복문을 활용하여 햄버거 메뉴 출력
+
+            // 숫자 입력 받기
+            // 입력 받은 숫자가 올바르다면 인덱스로 활용해서 Menu가 가지고 있는 List<MenuItem>에 접근하기
+            // menu.getMenuItems().get(i); 같은 형식으로 하나씩 들어가서 얻어와야 합니다.
         }
-        System.out.println("프로그램을 종료합니다.");
     }
 }
