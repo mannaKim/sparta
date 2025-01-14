@@ -1,7 +1,5 @@
 package com.example.kiosk.level4;
 
-import java.util.List;
-
 /*
  * MenuItem: 세부 메뉴 속성 가지는 클래스
  * 햄버거의 이름, 가격설명
