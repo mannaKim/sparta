@@ -1,6 +1,5 @@
 package com.example.kiosk.level4;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,12 +25,10 @@ public class Main {
                 new MenuItem("Honey Butter Crunch", 8.9, "달콤한 허니버터소스와 슈가콘 쿠키가 함께하는 바닐라 커스터드")
         );
 
-        // Menu 객체 생성을 통해 이름 설정
-        // Menu 클래스 내 있는 List<MenuItem> 에 MenuItem 객체 생성하면서 삽입
-        Menu burgersMenu = new Menu("BURGERS MENU", burgersMenuItems);
-        Menu drinksMenu = new Menu("DRINKS MENU", drinksMenuItems);
-        Menu dessertsMenu = new Menu("DESSERTS MENU", dessertsMenuItems);
-
+        // Menu 객체 생성
+        Menu burgersMenu = new Menu("Burgers", burgersMenuItems);
+        Menu drinksMenu = new Menu("Drinks", drinksMenuItems);
+        Menu dessertsMenu = new Menu("Desserts", dessertsMenuItems);
         // Menu 객체 리스트 생성
         List<Menu> menuList = Arrays.asList(burgersMenu, drinksMenu, dessertsMenu);
 

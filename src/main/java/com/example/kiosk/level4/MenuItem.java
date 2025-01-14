@@ -13,28 +13,9 @@ public class MenuItem {
     public double menuPrice;
     public String menuDescription;
 
-    MenuItem (String menuName, double menuPrice, String menuDescription) {
+    public MenuItem (String menuName, double menuPrice, String menuDescription) {
         this.menuName = menuName;
         this.menuPrice = menuPrice;
         this.menuDescription = menuDescription;
-    }
-
-    public static void printMenuList(List<MenuItem> menuList) {
-        // 반복문을 활용해 List 안에 있는 MenuItem을 하나씩 출력
-        StringBuilder sb = new StringBuilder();
-        sb.append("[ SHAKESHACK MENU ]\n");
-        for (int i = 0; i < menuList.size(); i++) {
-            sb.append(i + 1).append(". ");
-            sb.append(menuList.get(i).menuName).append("\t | "); // 이름
-            sb.append(menuList.get(i).menuPrice).append("\t | "); // 가격
-            sb.append(menuList.get(i).menuDescription).append("\n"); // 설명
-        }
-        sb.append("0. 종료      | 종료");
-        System.out.println(sb);
-    }
-
-    public void printMenu() {
-        String menuString = "선택한 메뉴 : " + this.menuName + "\t | " + this.menuPrice + "\t | " + this.menuDescription + "\n";
-        System.out.print(menuString);
     }
 }

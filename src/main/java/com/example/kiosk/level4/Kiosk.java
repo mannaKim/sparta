@@ -11,30 +11,62 @@ public class Kiosk {
     // Menu를 관리하는 리스트 필드
     public List<Menu> menuList;
     
-    // 생성자를 통해 List<Menu> menuList 값 할당
+    // 생성자를 통해 List<Menu> menuList 필드 값 할당
     public Kiosk(List<Menu> menuList) {
         this.menuList = menuList;
     }
 
-    // main 함수에서 관리하던 입력과 반복문 로직은 이제 start 함수를 만들어 관리합니다.
     public void start() {
-        // Scanner 선언
         Scanner sc = new Scanner(System.in);
 
-        // 반복문 시작
         while (true) {
-            // List와 Menu 클래스 활용하여 상위 카테고리 메뉴 출력
+            // 카테고리 메뉴 출력
+            Menu.printCategoryMenu(this.menuList);
 
-            // 숫자 입력 받기
+            String selectedMenu = sc.next();
+            try {
+                if ("0".equals(selectedMenu)) break;
 
-            // 입력 받은 숫자가 올바르다면 인덱스로 활용하여 List에 접근하기
-            // List<Menu>에 인덱스로 접근하면 Menu만 추출할 수 있겠죠?
+                int menuNumber = Integer.parseInt(selectedMenu);
+                if (menuNumber > 0 && menuNumber <= this.menuList.size()) {
+                    // 카테고리 메뉴 중 선택된 메뉴(menuItems) 출력
+                    startViewSelectedCategoryMenu(menuNumber - 1);
+                } else {
+                    throw new IllegalArgumentException("입력 가능한 숫자는 0~" + this.menuList.size() + "입니다.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("\"" + selectedMenu + "\"은 숫자가 아닙니다. 숫자를 다시 입력하세요.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                System.out.println("알 수 없는 오류가 발생했습니다. : " + e.getMessage());
+            }
+            System.out.println();
+        }
+        System.out.println("프로그램을 종료합니다.");
+    }
 
-            // Menu가 가진 List<MenuItem>을 반복문을 활용하여 햄버거 메뉴 출력
+    private void startViewSelectedCategoryMenu(int index) {
+        // 선택된 menuItems 필드 출력
+        this.menuList.get(index).printMenuItems();
 
-            // 숫자 입력 받기
-            // 입력 받은 숫자가 올바르다면 인덱스로 활용해서 Menu가 가지고 있는 List<MenuItem>에 접근하기
-            // menu.getMenuItems().get(i); 같은 형식으로 하나씩 들어가서 얻어와야 합니다.
+        Scanner sc = new Scanner(System.in);
+        String selectedMenuItem = sc.next();
+        try {
+            if ("0".equals(selectedMenuItem)) return;
+            int menuItemNumber = Integer.parseInt(selectedMenuItem);
+            if (menuItemNumber > 0 && menuItemNumber <= this.menuList.get(index).menuItems.size()) {
+                // menuItems 중 선택된 menuItem 출력
+                this.menuList.get(index).printSelectedMenuItem(menuItemNumber - 1);
+            } else {
+                throw new IllegalArgumentException("입력 가능한 숫자는 0~" + this.menuList.size() + "입니다.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("\"" + selectedMenuItem + "\"은 숫자가 아닙니다. 숫자를 다시 입력하세요.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("알 수 없는 오류가 발생했습니다. : " + e.getMessage());
         }
     }
 }
