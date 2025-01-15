@@ -9,7 +9,7 @@ import java.util.Scanner;
  */
 public class Kiosk {
     // Menu를 관리하는 리스트 필드
-    public List<Menu> menuList;
+    private final List<Menu> menuList;
 
     // 생성자를 통해 List<Menu> menuList 필드 값 할당
     public Kiosk(List<Menu> menuList) {
