@@ -35,9 +35,9 @@ public class Menu {
             String menuItemString = String.format(
                     "%d. %-20s\t | W %.1f\t | %s\n",
                     i + 1,
-                    this.menuItems.get(i).menuName,
-                    this.menuItems.get(i).menuPrice,
-                    this.menuItems.get(i).menuDescription
+                    this.menuItems.get(i).getMenuName(),
+                    this.menuItems.get(i).getMenuPrice(),
+                    this.menuItems.get(i).getMenuDescription()
             );
             sb.append(menuItemString);
         }
@@ -49,9 +49,9 @@ public class Menu {
     public void printSelectedMenuItem(int index) {
         String menuString = String.format(
                 "선택한 메뉴 : %s\t | W %.1f\t | %s\n",
-                this.menuItems.get(index).menuName,
-                this.menuItems.get(index).menuPrice,
-                this.menuItems.get(index).menuDescription
+                this.menuItems.get(index).getMenuName(),
+                this.menuItems.get(index).getMenuPrice(),
+                this.menuItems.get(index).getMenuDescription()
         );
         System.out.print(menuString);
     }

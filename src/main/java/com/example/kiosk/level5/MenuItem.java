@@ -7,9 +7,21 @@ package com.example.kiosk.level5;
  * new MenuItem("ShackBurger", 6.9, "토마토, 양상추, 쉑소스가 토핑된 치즈버거")
  */
 public class MenuItem {
-    public String menuName;
-    public double menuPrice;
-    public String menuDescription;
+    private String menuName;
+    private double menuPrice;
+    private String menuDescription;
+
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public double getMenuPrice() {
+        return menuPrice;
+    }
+
+    public String getMenuDescription() {
+        return menuDescription;
+    }
 
     public MenuItem (String menuName, double menuPrice, String menuDescription) {
         this.menuName = menuName;
