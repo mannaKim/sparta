@@ -59,7 +59,7 @@ public class Kiosk {
                 // menuItems 중 선택된 menuItem 출력
                 this.menuList.get(index).printSelectedMenuItem(menuItemNumber - 1);
             } else {
-                throw new IllegalArgumentException("입력 가능한 숫자는 0~" + this.menuList.size() + "입니다.");
+                throw new IllegalArgumentException("입력 가능한 숫자는 0~" + this.menuList.get(index).menuItems.size() + "입니다.");
             }
         } catch (NumberFormatException e) {
             System.out.println("\"" + selectedMenuItem + "\"은 숫자가 아닙니다. 숫자를 다시 입력하세요.");
