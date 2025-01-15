@@ -7,8 +7,16 @@ import java.util.List;
  * 예시 : 버거 메뉴, 음료 메뉴 등 각 카테고리 내에 여러 MenuItem을 포함합니다.
  */
 public class Menu {
-    public String menuCategory;         // 메뉴 카테고리(버거, 음료, 디저트 등)
-    public List<MenuItem> menuItems;    // MenuItem 클래스를 List로 관리
+    private final String menuCategory;         // 메뉴 카테고리(버거, 음료, 디저트 등)
+    private final List<MenuItem> menuItems;    // MenuItem 클래스를 List로 관리
+
+    public List<MenuItem> getMenuItems() {
+        return menuItems;
+    }
+
+    public String getMenuCategory() {
+        return menuCategory;
+    }
 
     public Menu(String menuCategory, List<MenuItem> menuItems) {
         this.menuCategory = menuCategory;

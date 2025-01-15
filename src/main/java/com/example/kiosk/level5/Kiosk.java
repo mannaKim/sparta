@@ -27,12 +27,13 @@ public class Kiosk {
             try {
                 if ("0".equals(selectedMenu)) break;
 
-                int menuNumber = Integer.parseInt(selectedMenu);
-                if (menuNumber > 0 && menuNumber <= this.menuList.size()) {
+                int selectedMenuNumber = Integer.parseInt(selectedMenu);
+                int categoryCount = this.menuList.size();
+                if (selectedMenuNumber > 0 && selectedMenuNumber <= categoryCount) {
                     // 카테고리 메뉴 중 선택된 메뉴(menuItems) 출력
-                    startViewSelectedCategoryMenu(menuNumber - 1);
+                    startViewSelectedCategoryMenu(selectedMenuNumber - 1);
                 } else {
-                    throw new IllegalArgumentException("입력 가능한 숫자는 0~" + this.menuList.size() + "입니다.");
+                    throw new IllegalArgumentException("입력 가능한 숫자는 0~" + categoryCount + "입니다.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("\"" + selectedMenu + "\"은 숫자가 아닙니다. 숫자를 다시 입력하세요.");
@@ -54,12 +55,13 @@ public class Kiosk {
         String selectedMenuItem = sc.next();
         try {
             if ("0".equals(selectedMenuItem)) return;
-            int menuItemNumber = Integer.parseInt(selectedMenuItem);
-            if (menuItemNumber > 0 && menuItemNumber <= this.menuList.get(index).menuItems.size()) {
+            int selectedMenuItemNumber = Integer.parseInt(selectedMenuItem);
+            int menuItemsCount = this.menuList.get(index).getMenuItems().size();
+            if (selectedMenuItemNumber > 0 && selectedMenuItemNumber <= menuItemsCount) {
                 // menuItems 중 선택된 menuItem 출력
-                this.menuList.get(index).printSelectedMenuItem(menuItemNumber - 1);
+                this.menuList.get(index).printSelectedMenuItem(selectedMenuItemNumber - 1);
             } else {
-                throw new IllegalArgumentException("입력 가능한 숫자는 0~" + this.menuList.size() + "입니다.");
+                throw new IllegalArgumentException("입력 가능한 숫자는 0~" + menuItemsCount + "입니다.");
             }
         } catch (NumberFormatException e) {
             System.out.println("\"" + selectedMenuItem + "\"은 숫자가 아닙니다. 숫자를 다시 입력하세요.");
