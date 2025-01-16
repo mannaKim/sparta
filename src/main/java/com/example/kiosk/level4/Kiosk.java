@@ -1,5 +1,7 @@
 package com.example.kiosk.level4;
 
+import com.example.kiosk.exceptions.InvalidMenuSelectionException;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -28,15 +30,16 @@ public class Kiosk {
                 if ("0".equals(selectedMenu)) break;
 
                 int menuNumber = Integer.parseInt(selectedMenu);
-                if (menuNumber > 0 && menuNumber <= this.menuList.size()) {
+                int categoryCount = this.menuList.size();
+                if (menuNumber > 0 && menuNumber <= categoryCount) {
                     // 카테고리 메뉴 중 선택된 메뉴(menuItems) 출력
                     startViewSelectedCategoryMenu(menuNumber - 1);
                 } else {
-                    throw new IllegalArgumentException("입력 가능한 숫자는 0~" + this.menuList.size() + "입니다.");
+                    throw new InvalidMenuSelectionException(0, categoryCount);
                 }
             } catch (NumberFormatException e) {
                 System.out.println("\"" + selectedMenu + "\"은 숫자가 아닙니다. 숫자를 다시 입력하세요.");
-            } catch (IllegalArgumentException e) {
+            } catch (InvalidMenuSelectionException e) {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
                 System.out.println("알 수 없는 오류가 발생했습니다. : " + e.getMessage());
@@ -55,15 +58,16 @@ public class Kiosk {
         try {
             if ("0".equals(selectedMenuItem)) return;
             int menuItemNumber = Integer.parseInt(selectedMenuItem);
-            if (menuItemNumber > 0 && menuItemNumber <= this.menuList.get(index).menuItems.size()) {
+            int menuItemsCount = this.menuList.get(index).menuItems.size();
+            if (menuItemNumber > 0 && menuItemNumber <= menuItemsCount) {
                 // menuItems 중 선택된 menuItem 출력
                 this.menuList.get(index).printSelectedMenuItem(menuItemNumber - 1);
             } else {
-                throw new IllegalArgumentException("입력 가능한 숫자는 0~" + this.menuList.get(index).menuItems.size() + "입니다.");
+                throw new InvalidMenuSelectionException(0, menuItemsCount);
             }
         } catch (NumberFormatException e) {
             System.out.println("\"" + selectedMenuItem + "\"은 숫자가 아닙니다. 숫자를 다시 입력하세요.");
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidMenuSelectionException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println("알 수 없는 오류가 발생했습니다. : " + e.getMessage());
