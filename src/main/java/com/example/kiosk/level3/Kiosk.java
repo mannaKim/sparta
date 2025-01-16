@@ -1,5 +1,7 @@
 package com.example.kiosk.level3;
 
+import com.example.kiosk.exceptions.InvalidMenuSelectionException;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -37,11 +39,11 @@ public class Kiosk {
                 if (menuNumber > 0 && menuNumber <= this.menuItems.size()) {
                     this.menuItems.get(menuNumber - 1).printMenu();
                 } else { // 아니라면 IllegalArgumentException 예외 발생
-                    throw new IllegalArgumentException("입력 가능한 숫자는 0~" + this.menuItems.size() + "입니다.");
+                    throw new InvalidMenuSelectionException(0, this.menuItems.size());
                 }
             } catch (NumberFormatException e) {
                 System.out.println("\"" + selectedMenu + "\"은 숫자가 아닙니다. 숫자를 다시 입력하세요.");
-            } catch (IllegalArgumentException e) {
+            } catch (InvalidMenuSelectionException e) {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
                 System.out.println("알 수 없는 오류가 발생했습니다. : " + e.getMessage());

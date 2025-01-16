@@ -1,5 +1,7 @@
 package com.example.kiosk.level6;
 
+import com.example.kiosk.exceptions.InvalidMenuSelectionException;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -38,27 +40,33 @@ public class Kiosk {
                 if ("0".equals(selectedMenu)) break;
 
                 int selectedMenuNumber = Integer.parseInt(selectedMenu);
-                if (selectedMenuNumber > 0 ) {
-                    if (selectedMenuNumber <= categoryCount) {
+                if (!canOrder) {
+                    if (selectedMenuNumber > 0 && selectedMenuNumber <= categoryCount) {
                         startViewSelectedCategoryMenu(selectedMenuNumber - 1);
                     }
-                    else if (canOrder && selectedMenuNumber <= totalMenuCount) {
+                    else {
+                        throw new InvalidMenuSelectionException(0, categoryCount);
+                    }
+                }
+                else {
+                    if (selectedMenuNumber > 0 && selectedMenuNumber <= categoryCount) {
+                        startViewSelectedCategoryMenu(selectedMenuNumber - 1);
+                    }
+                    else if (selectedMenuNumber > 0 && selectedMenuNumber <= totalMenuCount) {
                         if (selectedMenuNumber == totalMenuCount) {
-                            cart.cancelOrder();
-                            System.out.println("\n전체 주문이 취소되어 처음으로 돌아갑니다.");
-                            System.out.println("\n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
+                            startCancelOrder();
                         }
                         else {
                             startPlaceOrder();
                         }
                     }
-                }
-                else {
-                    throw new IllegalArgumentException("입력 가능한 숫자는 0~" + categoryCount + "입니다.");
+                    else {
+                        throw new InvalidMenuSelectionException(0, totalMenuCount);
+                    }
                 }
             } catch (NumberFormatException e) {
                 System.out.println("\"" + selectedMenu + "\"은 숫자가 아닙니다. 숫자를 다시 입력하세요.");
-            } catch (IllegalArgumentException e) {
+            } catch (InvalidMenuSelectionException e) {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
                 System.out.println("알 수 없는 오류가 발생했습니다. : " + e.getMessage());
@@ -84,11 +92,11 @@ public class Kiosk {
                 // 해당 item 장바구니에 담기
                 startAddToCart(menuList.get(index).getMenuItem(selectedMenuItemNumber - 1));
             } else {
-                throw new IllegalArgumentException("입력 가능한 숫자는 0~" + menuItemsCount + "입니다.");
+                throw new InvalidMenuSelectionException(0, menuItemsCount);
             }
         } catch (NumberFormatException e) {
             System.out.println("\"" + selectedMenuItem + "\"은 숫자가 아닙니다. 숫자를 다시 입력하세요.");
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidMenuSelectionException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println("알 수 없는 오류가 발생했습니다. : " + e.getMessage());
@@ -119,11 +127,11 @@ public class Kiosk {
                 System.out.println("\n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
             }
             else {
-                throw new IllegalArgumentException("입력 가능한 숫자는 " + ADD_TO_CART_OPTION + "~" + CANCEL_OPTION + "입니다.");
+                throw new InvalidMenuSelectionException(ADD_TO_CART_OPTION, CANCEL_OPTION);
             }
         } catch (NumberFormatException e) {
             System.out.println("\"" + addToCartChoice + "\"은/는 숫자가 아닙니다.");
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidMenuSelectionException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println("알 수 없는 오류가 발생했습니다. : " + e.getMessage());
@@ -152,14 +160,20 @@ public class Kiosk {
                 System.out.println("\n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
             }
             else {
-                throw new IllegalArgumentException("입력 가능한 숫자는 " + PLACE_ORDER_OPTION + "~" + RETURN_TO_MENU_OPTION + "입니다.");
+                throw new InvalidMenuSelectionException(PLACE_ORDER_OPTION, RETURN_TO_MENU_OPTION);
             }
         } catch (NumberFormatException e) {
             System.out.println("\"" + placeOrderChoice + "\"은/는 숫자가 아닙니다.");
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidMenuSelectionException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println("알 수 없는 오류가 발생했습니다. : " + e.getMessage());
         }
+    }
+
+    private void startCancelOrder() {
+        cart.cancelOrder();
+        System.out.println("\n전체 주문이 취소되어 처음으로 돌아갑니다.");
+        System.out.println("\n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
     }
 }
