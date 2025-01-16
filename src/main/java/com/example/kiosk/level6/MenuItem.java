@@ -1,5 +1,7 @@
 package com.example.kiosk.level6;
 
+import java.util.Objects;
+
 /*
  * MenuItem: 세부 메뉴 속성 가지는 클래스
  * 햄버거의 이름, 가격설명
@@ -7,9 +9,9 @@ package com.example.kiosk.level6;
  * new MenuItem("ShackBurger", 6.9, "토마토, 양상추, 쉑소스가 토핑된 치즈버거")
  */
 public class MenuItem {
-    private String menuName;
-    private double menuPrice;
-    private String menuDescription;
+    private final String menuName;
+    private final double menuPrice;
+    private final String menuDescription;
 
     public String getMenuName() {
         return menuName;
@@ -27,5 +29,17 @@ public class MenuItem {
         this.menuName = menuName;
         this.menuPrice = menuPrice;
         this.menuDescription = menuDescription;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MenuItem menuItem = (MenuItem) o;
+        return Double.compare(menuPrice, menuItem.menuPrice) == 0 && Objects.equals(menuName, menuItem.menuName) && Objects.equals(menuDescription, menuItem.menuDescription);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(menuName, menuPrice, menuDescription);
     }
 }
