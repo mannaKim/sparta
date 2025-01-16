@@ -19,7 +19,7 @@ public class Cart {
     public double getTotalPrice() {
         double totalPrice = 0;
         for( MenuItem cartItem : cartItemMap.keySet() ){
-            totalPrice += cartItem.getMenuPrice();
+            totalPrice += (cartItem.getMenuPrice() * cartItemMap.get(cartItem));
         }
         return totalPrice;
     }
