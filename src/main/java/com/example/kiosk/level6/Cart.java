@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 /*
  * Cart: 장바구니 클래스
-*/
+ */
 public class Cart {
     private final HashMap<MenuItem, Integer> cartItemMap;
 
@@ -44,7 +44,7 @@ public class Cart {
         sb.append("\n[ Orders ]\n");
         for( MenuItem cartItem : cartItemMap.keySet() ){
             sb.append("수량: ").append(cartItemMap.get(cartItem)).append("\t | ");
-            sb.append(Menu.formatMenuItem(cartItem));
+            sb.append(MenuItem.formatMenuItem(cartItem));
             sb.append("\n");
         }
 

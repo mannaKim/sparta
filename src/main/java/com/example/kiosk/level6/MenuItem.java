@@ -13,6 +13,12 @@ public class MenuItem {
     private final double menuPrice;
     private final String menuDescription;
 
+    public MenuItem (String menuName, double menuPrice, String menuDescription) {
+        this.menuName = menuName;
+        this.menuPrice = menuPrice;
+        this.menuDescription = menuDescription;
+    }
+
     public String getMenuName() {
         return menuName;
     }
@@ -25,10 +31,14 @@ public class MenuItem {
         return menuDescription;
     }
 
-    public MenuItem (String menuName, double menuPrice, String menuDescription) {
-        this.menuName = menuName;
-        this.menuPrice = menuPrice;
-        this.menuDescription = menuDescription;
+    // menuItem의 String format을 반환하는 static 함수
+    public static String formatMenuItem(MenuItem item) {
+        return String.format(
+                "%-20s\t | W %.1f\t | %s",
+                item.getMenuName(),
+                item.getMenuPrice(),
+                item.getMenuDescription()
+        );
     }
 
     @Override

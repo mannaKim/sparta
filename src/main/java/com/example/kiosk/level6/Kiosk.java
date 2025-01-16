@@ -8,11 +8,9 @@ import java.util.Scanner;
  * 설명: 키오스크 프로그램의 메뉴를 관리하고 사용자 입력을 처리하는 클래스입니다.
  */
 public class Kiosk {
-    // Menu를 관리하는 리스트 필드
     private final List<Menu> menuList;
     private Cart cart;
 
-    // 생성자를 통해 List<Menu> menuList 필드 값 할당
     public Kiosk(List<Menu> menuList) {
         this.menuList = menuList;
     }
@@ -22,10 +20,10 @@ public class Kiosk {
         cart = new Cart();
 
         while (true) {
-            // 카테고리 메뉴 출력
+            // 카테고리 출력
             Menu.printCategoryMenu(menuList);
 
-            // Order 메뉴 출력
+            // Order 메뉴(주문하기/취소하기) 출력
             int categoryCount = menuList.size();
             int additionalOrderMenuCount = 2;
             int totalMenuCount = categoryCount + additionalOrderMenuCount;
@@ -42,11 +40,9 @@ public class Kiosk {
                 int selectedMenuNumber = Integer.parseInt(selectedMenu);
                 if (selectedMenuNumber > 0 ) {
                     if (selectedMenuNumber <= categoryCount) {
-                        // 카테고리 메뉴 중 선택된 메뉴(menuItems) 출력
                         startViewSelectedCategoryMenu(selectedMenuNumber - 1);
                     }
                     else if (canOrder && selectedMenuNumber <= totalMenuCount) {
-                        // 주문하기 Or 취소하기
                         if (selectedMenuNumber == totalMenuCount) {
                             cart.cancelOrder();
                             System.out.println("\n전체 주문이 취소되어 처음으로 돌아갑니다.");
@@ -73,7 +69,7 @@ public class Kiosk {
     }
 
     private void startViewSelectedCategoryMenu(int index) {
-        // 선택된 menuItems 필드 출력
+        // 메뉴 출력
         menuList.get(index).printMenuItems();
 
         Scanner sc = new Scanner(System.in);
@@ -103,7 +99,7 @@ public class Kiosk {
         final int ADD_TO_CART_OPTION = 1; // 장바구니에 추가
         final int CANCEL_OPTION = 2;      // 취소
 
-        System.out.println("\n\"" + Menu.formatMenuItem(item) + "\"");
+        System.out.println("\n\"" + MenuItem.formatMenuItem(item) + "\"");
         System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
         System.out.println("1. 확인\t2. 취소");
 

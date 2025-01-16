@@ -32,9 +32,7 @@ public class Main {
         // Menu 객체 리스트 생성
         List<Menu> menuList = Arrays.asList(burgersMenu, drinksMenu, dessertsMenu);
 
-        // Kiosk 객체 생성
         Kiosk kiosk = new Kiosk(menuList);
-        // Kiosk 내 시작하는 함수 호출
         kiosk.start();
     }
 }
