@@ -27,7 +27,8 @@ public class Kiosk {
 
             // Order 메뉴 출력
             int categoryCount = menuList.size();
-            int numOfOrderMenu = categoryCount + 2;
+            int additionalOrderMenuCount = 2;
+            int totalMenuCount = categoryCount + additionalOrderMenuCount;
             boolean canOrder = false;
             if (!cart.getCartItemMap().isEmpty()) {
                 cart.printOrderMenu(categoryCount);
@@ -39,12 +40,22 @@ public class Kiosk {
                 if ("0".equals(selectedMenu)) break;
 
                 int selectedMenuNumber = Integer.parseInt(selectedMenu);
-                if (selectedMenuNumber > 0 && selectedMenuNumber <= categoryCount) {
-                    // 카테고리 메뉴 중 선택된 메뉴(menuItems) 출력
-                    startViewSelectedCategoryMenu(selectedMenuNumber - 1);
-                }
-                else if (canOrder && selectedMenuNumber > 0 && selectedMenuNumber <= numOfOrderMenu) {
-                    // 주문하기 Or 취소하기
+                if (selectedMenuNumber > 0 ) {
+                    if (selectedMenuNumber <= categoryCount) {
+                        // 카테고리 메뉴 중 선택된 메뉴(menuItems) 출력
+                        startViewSelectedCategoryMenu(selectedMenuNumber - 1);
+                    }
+                    else if (canOrder && selectedMenuNumber <= totalMenuCount) {
+                        // 주문하기 Or 취소하기
+                        if (selectedMenuNumber == totalMenuCount) {
+                            cart.cancelOrder();
+                            System.out.println("\n전체 주문이 취소되어 처음으로 돌아갑니다.");
+                            System.out.println("\n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
+                        }
+                        else {
+                            startPlaceOrder();
+                        }
+                    }
                 }
                 else {
                     throw new IllegalArgumentException("입력 가능한 숫자는 0~" + categoryCount + "입니다.");
@@ -88,27 +99,31 @@ public class Kiosk {
         }
     }
 
-    // 장바구니에 담기
     private void startAddToCart(MenuItem item) {
+        final int ADD_TO_CART_OPTION = 1; // 장바구니에 추가
+        final int CANCEL_OPTION = 2;      // 취소
+
         System.out.println("\n\"" + Menu.formatMenuItem(item) + "\"");
         System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
         System.out.println("1. 확인\t2. 취소");
 
         Scanner sc = new Scanner(System.in);
         String addToCartChoice = sc.next();
+
         try {
             int addToCartChoiceNumber = Integer.parseInt(addToCartChoice);
 
-            if (addToCartChoiceNumber == 1) {
+            if (addToCartChoiceNumber == ADD_TO_CART_OPTION) {
                 cart.addCartItem(item);
                 System.out.println("\n"+ item.getMenuName() + " 이 장바구니에 추가되었습니다.");
                 System.out.println("\n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
             }
-            else if (addToCartChoiceNumber == 2) {
-                System.out.println("취소되었습니다.\n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
+            else if (addToCartChoiceNumber == CANCEL_OPTION) {
+                System.out.println("\n취소되었습니다.");
+                System.out.println("\n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
             }
             else {
-                throw new IllegalArgumentException("입력 가능한 숫자는 1~2입니다.");
+                throw new IllegalArgumentException("입력 가능한 숫자는 " + ADD_TO_CART_OPTION + "~" + CANCEL_OPTION + "입니다.");
             }
         } catch (NumberFormatException e) {
             System.out.println("\"" + addToCartChoice + "\"은/는 숫자가 아닙니다.");
@@ -119,5 +134,36 @@ public class Kiosk {
         }
     }
 
-    // 주문하기: 주문 or 메뉴판으로 돌아가기
+    private void startPlaceOrder() {
+        final int PLACE_ORDER_OPTION = 1;       // 주문하기
+        final int RETURN_TO_MENU_OPTION = 2;    // 메뉴판으로 돌아가기
+
+        System.out.println("\n아래와 같이 주문하시겠습니까?");
+        cart.printCartItemsWithTotal();
+        System.out.println("1. 주문\t2. 메뉴판");
+
+        Scanner sc = new Scanner(System.in);
+        String placeOrderChoice = sc.next();
+
+        try {
+            int placeOrderChoiceNumber = Integer.parseInt(placeOrderChoice);
+
+            if (placeOrderChoiceNumber == PLACE_ORDER_OPTION) {
+                cart.placeOrder();
+            }
+            else if (placeOrderChoiceNumber == RETURN_TO_MENU_OPTION) {
+                System.out.println("\n메뉴판으로 돌아갑니다.");
+                System.out.println("\n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
+            }
+            else {
+                throw new IllegalArgumentException("입력 가능한 숫자는 " + PLACE_ORDER_OPTION + "~" + RETURN_TO_MENU_OPTION + "입니다.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("\"" + placeOrderChoice + "\"은/는 숫자가 아닙니다.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("알 수 없는 오류가 발생했습니다. : " + e.getMessage());
+        }
+    }
 }

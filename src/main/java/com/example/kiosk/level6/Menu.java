@@ -60,7 +60,7 @@ public class Menu {
     // Menu 객체의 menuItems 중 선택된 menuItem을 출력하는 함수
     public void printSelectedMenuItem(int index) {
         String menuString = String.format(
-                "선택한 메뉴 : %-20s\t | W %.1f\t | %s\n",
+                "선택한 메뉴 : %s\t | W %.1f\t | %s\n",
                 this.menuItems.get(index).getMenuName(),
                 this.menuItems.get(index).getMenuPrice(),
                 this.menuItems.get(index).getMenuDescription()

@@ -3,7 +3,7 @@ package com.example.kiosk.level6;
 import java.util.HashMap;
 
 /*
- * Cart: CartItem 클래스를 관리하는 클래스
+ * Cart: 장바구니 클래스
 */
 public class Cart {
     private final HashMap<MenuItem, Integer> cartItemMap;
@@ -16,19 +16,44 @@ public class Cart {
         return cartItemMap;
     }
 
+    public double getTotalPrice() {
+        double totalPrice = 0;
+        for( MenuItem cartItem : cartItemMap.keySet() ){
+            totalPrice += cartItem.getMenuPrice();
+        }
+        return totalPrice;
+    }
+
     public void addCartItem(MenuItem item) {
         int itemQuantity = cartItemMap.getOrDefault(item, 0) + 1;
         cartItemMap.put(item, itemQuantity);
-
-        /*System.out.println("[ 현재 장바구니 ]");
-        for( MenuItem cartItem : cartItemMap.keySet() ){
-            String stringMenu = Menu.formatMenuItem(cartItem)
-                    + "\t | 수량: " + cartItemMap.get(cartItem);
-            System.out.println(stringMenu);
-        }*/
     }
 
-    // Order Menu를 출력하는 함수
+    public void cancelOrder() {
+        cartItemMap.clear();
+    }
+
+    public void placeOrder() {
+        System.out.println("\n주문이 완료되었습니다. 금액은 W " + getTotalPrice() + " 입니다.");
+        System.out.println("**************************************************************");
+        cartItemMap.clear();
+    }
+
+    public void printCartItemsWithTotal() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n[ Orders ]\n");
+        for( MenuItem cartItem : cartItemMap.keySet() ){
+            sb.append("수량: ").append(cartItemMap.get(cartItem)).append("\t | ");
+            sb.append(Menu.formatMenuItem(cartItem));
+            sb.append("\n");
+        }
+
+        sb.append("\n[ Total ]\n");
+        sb.append("W ").append(getTotalPrice()).append("\n");
+
+        System.out.println(sb);
+    }
+
     public void printOrderMenu(int index) {
         StringBuilder sb = new StringBuilder();
         sb.append("\n[ ORDER MENU ]\n");
@@ -36,8 +61,4 @@ public class Cart {
         sb.append(index + 2).append(". Cancel\t| 진행중인 주문을 취소합니다.");
         System.out.println(sb);
     }
-
-    // 주문하기: 장바구니에 담긴 상품 출력, 토탈 금액 출력
-
-    // 취소하기: 장바구니 리셋
 }
