@@ -1,6 +1,7 @@
 package com.example.kiosk.level7;
 
 import java.util.HashMap;
+import java.util.List;
 
 /*
  * Cart: 장바구니 클래스
@@ -36,6 +37,17 @@ public class Cart {
 
     public void cancelOrder() {
         cartItemMap.clear();
+    }
+
+    public void removeSoldOutItems() {
+        List<MenuItem> soldOutItems = cartItemMap.keySet().stream()
+                .filter(MenuItem::isSoldOut)
+                .toList();
+
+        System.out.println();
+        soldOutItems.forEach(item -> System.out.println("\"" + item.getMenuName() + "\"은 품절되어 장바구니에서 삭제합니다."));
+
+        soldOutItems.forEach(cartItemMap::remove);
     }
 
     public void placeOrder(UserType userType) {
@@ -76,10 +88,13 @@ public class Cart {
     }
 
     public void printOrderMenu(int index) {
+        final int ORDER_OPTION = 1;     // 주문하기
+        final int CANCEL_OPTION = 2;    // 취소하기
+        
         StringBuilder sb = new StringBuilder();
         sb.append("\n[ ORDER MENU ]\n");
-        sb.append(index + 1).append(". Orders\t| 장바구니를 확인 후 주문합니다.\n");
-        sb.append(index + 2).append(". Cancel\t| 진행중인 주문을 취소합니다.");
+        sb.append(index + ORDER_OPTION).append(". Orders\t| 장바구니를 확인 후 주문합니다.\n");
+        sb.append(index + CANCEL_OPTION).append(". Cancel\t| 진행중인 주문을 취소합니다.");
         System.out.println(sb);
     }
 }

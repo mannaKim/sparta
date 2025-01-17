@@ -28,7 +28,9 @@ public class Menu {
         StringBuilder sb = new StringBuilder();
         sb.append("[ MAIN MENU ]\n");
         menuList.stream()
-                .map(menu -> (menuList.indexOf(menu) + 1) + ". " + menu.menuCategory + "\n")
+                .map(menu -> String.format("%d. %s\n",
+                        menuList.indexOf(menu) + 1,
+                        menu.menuCategory))
                 .forEach(sb::append);
         sb.append("0. 종료      | 종료");
         System.out.println(sb);
@@ -39,11 +41,13 @@ public class Menu {
         String menuHeader = String.format("\n[ %s MENU ]\n", menuCategory.toUpperCase());
         StringBuilder sb = new StringBuilder(menuHeader);
         menuItems.stream()
-                .map(item -> String.format("%d. %-20s\t | W %.1f\t | %s\n",
-                        menuItems.indexOf(item) + 1,
-                        item.getMenuName(),
-                        item.getMenuPrice(),
-                        item.getMenuDescription()))
+                .map(item -> {
+                    String soldOut = item.isSoldOut() ? "\t| (품절)" : "";
+                    return String.format("%d. %s%s\n",
+                            menuItems.indexOf(item) + 1,
+                            MenuItem.formatMenuItem(item),
+                            soldOut);
+                })
                 .forEach(sb::append);
         sb.append("0. 뒤로가기");
         System.out.println(sb);
@@ -52,10 +56,8 @@ public class Menu {
     // Menu 객체의 menuItems 중 선택된 menuItem을 출력하는 함수
     public void printSelectedMenuItem(int index) {
         String menuString = String.format(
-                "선택한 메뉴 : %s\t | W %.1f\t | %s\n",
-                menuItems.get(index).getMenuName(),
-                menuItems.get(index).getMenuPrice(),
-                menuItems.get(index).getMenuDescription()
+                "선택한 메뉴 : %s\n",
+                MenuItem.formatMenuItem(menuItems.get(index))
         );
         System.out.print(menuString);
     }

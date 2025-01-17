@@ -108,6 +108,10 @@ public class Kiosk {
         final int CANCEL_OPTION = 2;      // 취소
 
         System.out.println("\n\"" + MenuItem.formatMenuItem(item) + "\"");
+        if (item.isSoldOut()) {
+            System.out.println("위 메뉴는 품절되어 장바구니에 추가하실 수 없습니다.");
+            return;
+        }
         System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
         System.out.println("1. 확인\t2. 취소");
 
@@ -119,7 +123,7 @@ public class Kiosk {
 
             if (addToCartChoiceNumber == ADD_TO_CART_OPTION) {
                 cart.addCartItem(item);
-                System.out.println("\n"+ item.getMenuName() + " 이 장바구니에 추가되었습니다.");
+                System.out.println("\n\""+ item.getMenuName() + "\"이 장바구니에 추가되었습니다.");
                 System.out.println("\n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
             }
             else if (addToCartChoiceNumber == CANCEL_OPTION) {
@@ -141,6 +145,16 @@ public class Kiosk {
     private void startPlaceOrder() {
         final int PLACE_ORDER_OPTION = 1;       // 주문하기
         final int RETURN_TO_MENU_OPTION = 2;    // 메뉴판으로 돌아가기
+
+        // "기존 장바구니에서 특정 메뉴 빼기 기능을 통한 스트림 활용"을 위해
+        // 장바구니에 담아둔 상품(SmokeShack)이 품절된 경우 가정
+        menuList.get(0).getMenuItem(1).setSoldOut(true);
+        cart.removeSoldOutItems();
+        if (cart.getCartItemMap().isEmpty()) {
+            System.out.println("\n장바구니가 비었습니다.");
+            System.out.println("\n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
+            return;
+        }
 
         System.out.println("\n아래와 같이 주문하시겠습니까?");
         cart.printCartItemsWithTotal();

@@ -12,11 +12,20 @@ public class MenuItem {
     private final String menuName;
     private final double menuPrice;
     private final String menuDescription;
+    private boolean isSoldOut;
 
     public MenuItem (String menuName, double menuPrice, String menuDescription) {
         this.menuName = menuName;
         this.menuPrice = menuPrice;
         this.menuDescription = menuDescription;
+        this.isSoldOut = false;
+    }
+
+    public MenuItem (String menuName, double menuPrice, String menuDescription, boolean isSoldOut) {
+        this.menuName = menuName;
+        this.menuPrice = menuPrice;
+        this.menuDescription = menuDescription;
+        this.isSoldOut = isSoldOut;
     }
 
     public String getMenuName() {
@@ -29,6 +38,14 @@ public class MenuItem {
 
     public String getMenuDescription() {
         return menuDescription;
+    }
+
+    public boolean isSoldOut() {
+        return isSoldOut;
+    }
+
+    public void setSoldOut(boolean soldOut) {
+        isSoldOut = soldOut;
     }
 
     // menuItem의 String format을 반환하는 static 함수
