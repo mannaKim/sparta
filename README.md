@@ -173,30 +173,31 @@ src
 
 ## 📷 Screenshots
 ### Lv 7에 대한 Screenshots
+
 ### 🖼️ 카테고리 메뉴 출력
 ![Image](https://github.com/user-attachments/assets/68e6d1b6-0a61-4bc6-90cd-9dc47b01f118)
 ![Image](https://github.com/user-attachments/assets/29ba5a81-d651-4bb6-8039-08dde4c4a379)
 ![Image](https://github.com/user-attachments/assets/df9ecadb-7d44-4272-823a-ff9fad9f42dd)
 
 ### 🖼️ 메뉴를 장바구니에 담기
-- 메뉴 담기
+메뉴 담기
 <br>
 ![Image](https://github.com/user-attachments/assets/118a4407-08fc-4120-af7d-bc99803114a2)
-- 메뉴 담기 취소
+메뉴 담기 취소
 <br>
 ![Image](https://github.com/user-attachments/assets/f14d1c9a-a037-41c2-8f82-cc6e80648593)
-- 품절된 메뉴 담기
+품절된 메뉴 담기
 <br>
 ![Image](https://github.com/user-attachments/assets/5f9b7852-50ef-4927-87f6-c1e7da5ac47c)
 
 ### 🖼️ 주문 하기
-- 장바구니 확인: 장바구니에 담긴 메뉴와 합계 금액 출력
+장바구니 확인: 장바구니에 담긴 메뉴와 합계 금액 출력
 <br>
 ![Image](https://github.com/user-attachments/assets/f4365f9c-4ee9-4c19-8566-5a7b702ddd5d)
-- 장바구니 취소: 장바구니 비우기
+장바구니 취소: 장바구니 비우기
 <br>
 ![Image](https://github.com/user-attachments/assets/58cb0d60-d132-42fb-ba1c-833dee7e1fd0)
-- 장바구니에 담은 메뉴가 품절된 경우: 품절된 메뉴 삭제
+장바구니에 담은 메뉴가 품절된 경우: 품절된 메뉴 삭제
 <br>
 ![Image](https://github.com/user-attachments/assets/71bc05ac-43f6-4351-928f-2d55358a0ac7)
 ![Image](https://github.com/user-attachments/assets/d84d5366-8ddc-450e-a15b-dc64434fb596)
