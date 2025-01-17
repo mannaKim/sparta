@@ -153,7 +153,7 @@ public class Kiosk {
             int placeOrderChoiceNumber = Integer.parseInt(placeOrderChoice);
 
             if (placeOrderChoiceNumber == PLACE_ORDER_OPTION) {
-                cart.placeOrder();
+                startApplyDiscount();
             }
             else if (placeOrderChoiceNumber == RETURN_TO_MENU_OPTION) {
                 System.out.println("\n메뉴판으로 돌아갑니다.");
@@ -175,5 +175,27 @@ public class Kiosk {
         cart.cancelOrder();
         System.out.println("\n전체 주문이 취소되어 처음으로 돌아갑니다.");
         System.out.println("\n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
+    }
+
+    private void startApplyDiscount() {
+        System.out.println("\n할인 정보를 입력해주세요.");
+        UserType.printDiscountInformation();
+
+        Scanner sc = new Scanner(System.in);
+        String userTypeChoice = sc.next();
+
+        try {
+            int userTypeChoiceNumber = Integer.parseInt(userTypeChoice);
+            UserType userType = UserType.selectedUserType(userTypeChoiceNumber);
+
+            cart.placeOrder(userType);
+
+        } catch (NumberFormatException e) {
+            System.out.println("\"" + userTypeChoice + "\"은/는 숫자가 아닙니다.");
+        } catch (InvalidMenuSelectionException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("알 수 없는 오류가 발생했습니다. : " + e.getMessage());
+        }
     }
 }

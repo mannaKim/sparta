@@ -16,12 +16,17 @@ public class Cart {
         return cartItemMap;
     }
 
-    public double getTotalPrice() {
+    public double calculateTotalPrice() {
         double totalPrice = 0;
         for( MenuItem cartItem : cartItemMap.keySet() ){
             totalPrice += (cartItem.getMenuPrice() * cartItemMap.get(cartItem));
         }
         return totalPrice;
+    }
+
+    public double calculateTotalPrice(double discountRate) {
+        double originalTotalPrice = calculateTotalPrice();
+        return originalTotalPrice * (1 - discountRate);
     }
 
     public void addCartItem(MenuItem item) {
@@ -33,8 +38,24 @@ public class Cart {
         cartItemMap.clear();
     }
 
-    public void placeOrder() {
-        System.out.println("\n주문이 완료되었습니다. 금액은 W " + getTotalPrice() + " 입니다.");
+    public void placeOrder(UserType userType) {
+        StringBuilder sb = new StringBuilder("\n주문이 완료되었습니다. ");
+        if (userType.getDiscountRate() > 0) {
+            String orderString = String.format(
+                    "\"%s\" 할인이 적용되어, 금액은 W %.2f 입니다.",
+                    userType.getDiscountMenuName(),
+                    calculateTotalPrice(userType.getDiscountRate())
+            );
+            sb.append(orderString);
+        }
+        else {
+            String orderString = String.format(
+                    "금액은 W %.2f 입니다.",
+                    calculateTotalPrice()
+            );
+            sb.append(orderString);
+        }
+        System.out.println(sb);
         System.out.println("**************************************************************");
         cartItemMap.clear();
     }
@@ -49,7 +70,7 @@ public class Cart {
         }
 
         sb.append("\n[ Total ]\n");
-        sb.append("W ").append(getTotalPrice()).append("\n");
+        sb.append("W ").append(String.format("%.2f", calculateTotalPrice())).append("\n");
 
         System.out.println(sb);
     }
