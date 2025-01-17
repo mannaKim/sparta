@@ -24,9 +24,9 @@ public class Kiosk {
         while (true) {
             // 카테고리 출력
             Menu.printCategoryMenu(menuList);
+            int categoryCount = menuList.size();
 
             // Order 메뉴(주문하기/취소하기) 출력
-            int categoryCount = menuList.size();
             int additionalOrderMenuCount = 2;
             int totalMenuCount = categoryCount + additionalOrderMenuCount;
             boolean canOrder = false;
@@ -88,7 +88,7 @@ public class Kiosk {
             int menuItemsCount = menuList.get(index).getMenuItems().size();
             if (selectedMenuItemNumber > 0 && selectedMenuItemNumber <= menuItemsCount) {
                 // menuItems 중 선택된 menuItem 출력
-                this.menuList.get(index).printSelectedMenuItem(selectedMenuItemNumber - 1);
+                menuList.get(index).printSelectedMenuItem(selectedMenuItemNumber - 1);
                 // 해당 item 장바구니에 담기
                 startAddToCart(menuList.get(index).getMenuItem(selectedMenuItemNumber - 1));
             } else {

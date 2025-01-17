@@ -35,9 +35,9 @@ public enum UserType {
         for (UserType type : UserType.values()) {
             String discountInfoString = String.format(
                     "%d. %-5s\t: %d%%\n",
-                    type.getDiscountMenuNumber(),
-                    type.getDiscountMenuName(),
-                    (int) Math.round(type.getDiscountRate() * 100)
+                    type.discountMenuNumber,
+                    type.discountMenuName,
+                    (int) Math.round(type.discountRate * 100)
             );
             sb.append(discountInfoString);
         }
@@ -46,10 +46,10 @@ public enum UserType {
 
     public static UserType selectedUserType(int inputNumber) throws InvalidMenuSelectionException {
         for (UserType type : UserType.values()) {
-            if (type.getDiscountMenuNumber() == inputNumber) {
+            if (type.discountMenuNumber == inputNumber) {
                 return type;
             }
         }
-        throw new InvalidMenuSelectionException(NATIONAL_MERIT.getDiscountMenuNumber(), GENERAL.getDiscountMenuNumber());
+        throw new InvalidMenuSelectionException(NATIONAL_MERIT.discountMenuNumber, GENERAL.discountMenuNumber);
     }
 }

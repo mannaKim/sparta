@@ -63,11 +63,11 @@ public class Cart {
     public void printCartItemsWithTotal() {
         StringBuilder sb = new StringBuilder();
         sb.append("\n[ Orders ]\n");
-        for( MenuItem cartItem : cartItemMap.keySet() ){
-            sb.append("수량: ").append(cartItemMap.get(cartItem)).append("\t | ");
-            sb.append(MenuItem.formatMenuItem(cartItem));
-            sb.append("\n");
-        }
+        cartItemMap.keySet().stream()
+                .map(item -> String.format("수량: %d\t | %s\n",
+                        cartItemMap.get(item),
+                        MenuItem.formatMenuItem(item)))
+                .forEach(sb::append);
 
         sb.append("\n[ Total ]\n");
         sb.append("W ").append(String.format("%.2f", calculateTotalPrice())).append("\n");
