@@ -21,19 +21,14 @@ public class Main {
             // 전체 메뉴 출력
             printMenuList(menuList);
 
-            // Scanner를 사용하여 여러 햄버거 메뉴를 출력합니다.
             String selectedMenu = sc.next();
             try {
-                // 반복문을 이용해서 특정 번호가 입력되면 프로그램을 종료합니다.
                 if ("0".equals(selectedMenu)) break;
 
-                // 입력받은 매뉴를 정수로 변환
                 int menuNumber = Integer.parseInt(selectedMenu);
-                
-                // 메뉴 리스트에 있는 번호라면 해당 메뉴의 이름,가격,설명을 출력 
                 if (menuNumber > 0 && menuNumber <= menuList.size()) {
                     printMenu(menuList.get(menuNumber - 1));
-                } else { // 아니라면 IllegalArgumentException 예외 발생
+                } else {
                     throw new InvalidMenuSelectionException(0, menuList.size());
                 }
             } catch (NumberFormatException e) {
@@ -47,18 +42,20 @@ public class Main {
         }
         System.out.println("프로그램을 종료합니다.");
     }
+
     public static void printMenuList(List<List<String>> menuList) {
         StringBuilder sb = new StringBuilder();
         sb.append("[ SHAKESHACK MENU ]\n");
         for (int i = 0; i < menuList.size(); i++) {
             sb.append(i + 1).append(". ");
-            sb.append(menuList.get(i).get(0)).append("\t | "); // 이름
-            sb.append(menuList.get(i).get(1)).append("\t | "); // 가격
-            sb.append(menuList.get(i).get(2)).append("\n"); // 설명
+            sb.append(menuList.get(i).get(0)).append("\t | ");  // 이름
+            sb.append(menuList.get(i).get(1)).append("\t | ");  // 가격
+            sb.append(menuList.get(i).get(2)).append("\n");     // 설명
         }
         sb.append("0. 종료      | 종료");
         System.out.println(sb);
     }
+
     public static void printMenu(List<String> menu) {
         String menuString = "선택한 메뉴 : " + menu.get(0) + "\t | " + menu.get(1) + "\t | " + menu.get(2) + "\n";
         System.out.print(menuString);

@@ -25,16 +25,13 @@ public class Main {
                 new MenuItem("Honey Butter Crunch", 8.9, "달콤한 허니버터소스와 슈가콘 쿠키가 함께하는 바닐라 커스터드")
         );
 
-        // Menu 객체 생성
         Menu burgersMenu = new Menu("Burgers", burgersMenuItems);
         Menu drinksMenu = new Menu("Drinks", drinksMenuItems);
         Menu dessertsMenu = new Menu("Desserts", dessertsMenuItems);
-        // Menu 객체 리스트 생성
+
         List<Menu> menuList = Arrays.asList(burgersMenu, drinksMenu, dessertsMenu);
 
-        // Kiosk 객체 생성
         Kiosk kiosk = new Kiosk(menuList);
-        // Kiosk 내 시작하는 함수 호출
         kiosk.start();
     }
 }

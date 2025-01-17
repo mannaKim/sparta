@@ -7,8 +7,8 @@ import java.util.List;
  * 예시 : 버거 메뉴, 음료 메뉴 등 각 카테고리 내에 여러 MenuItem을 포함합니다.
  */
 public class Menu {
-    private final String menuCategory;         // 메뉴 카테고리(버거, 음료, 디저트 등)
-    private final List<MenuItem> menuItems;    // MenuItem 클래스를 List로 관리
+    private final String menuCategory;
+    private final List<MenuItem> menuItems;
 
     public List<MenuItem> getMenuItems() {
         return menuItems;
@@ -37,15 +37,15 @@ public class Menu {
 
     // Menu 객체의 menuItems 필드를 출력하는 함수
     public void printMenuItems() {
-        String menuHeader = String.format("\n[ %s MENU ]\n", this.menuCategory.toUpperCase());
+        String menuHeader = String.format("\n[ %s MENU ]\n", menuCategory.toUpperCase());
         StringBuilder sb = new StringBuilder(menuHeader);
-        for (int i = 0; i < this.menuItems.size(); i++) {
+        for (int i = 0; i < menuItems.size(); i++) {
             String menuItemString = String.format(
                     "%d. %-20s\t | W %.1f\t | %s\n",
                     i + 1,
-                    this.menuItems.get(i).getMenuName(),
-                    this.menuItems.get(i).getMenuPrice(),
-                    this.menuItems.get(i).getMenuDescription()
+                    menuItems.get(i).getMenuName(),
+                    menuItems.get(i).getMenuPrice(),
+                    menuItems.get(i).getMenuDescription()
             );
             sb.append(menuItemString);
         }
@@ -57,9 +57,9 @@ public class Menu {
     public void printSelectedMenuItem(int index) {
         String menuString = String.format(
                 "선택한 메뉴 : %s\t | W %.1f\t | %s\n",
-                this.menuItems.get(index).getMenuName(),
-                this.menuItems.get(index).getMenuPrice(),
-                this.menuItems.get(index).getMenuDescription()
+                menuItems.get(index).getMenuName(),
+                menuItems.get(index).getMenuPrice(),
+                menuItems.get(index).getMenuDescription()
         );
         System.out.print(menuString);
     }

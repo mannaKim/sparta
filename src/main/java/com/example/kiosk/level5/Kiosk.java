@@ -10,10 +10,8 @@ import java.util.Scanner;
  * 설명: 키오스크 프로그램의 메뉴를 관리하고 사용자 입력을 처리하는 클래스입니다.
  */
 public class Kiosk {
-    // Menu를 관리하는 리스트 필드
     private final List<Menu> menuList;
 
-    // 생성자를 통해 List<Menu> menuList 필드 값 할당
     public Kiosk(List<Menu> menuList) {
         this.menuList = menuList;
     }
@@ -23,14 +21,14 @@ public class Kiosk {
 
         while (true) {
             // 카테고리 메뉴 출력
-            Menu.printCategoryMenu(this.menuList);
+            Menu.printCategoryMenu(menuList);
 
             String selectedMenu = sc.next();
             try {
                 if ("0".equals(selectedMenu)) break;
 
                 int selectedMenuNumber = Integer.parseInt(selectedMenu);
-                int categoryCount = this.menuList.size();
+                int categoryCount = menuList.size();
                 if (selectedMenuNumber > 0 && selectedMenuNumber <= categoryCount) {
                     // 카테고리 메뉴 중 선택된 메뉴(menuItems) 출력
                     startViewSelectedCategoryMenu(selectedMenuNumber - 1);
@@ -51,17 +49,17 @@ public class Kiosk {
 
     private void startViewSelectedCategoryMenu(int index) {
         // 선택된 menuItems 필드 출력
-        this.menuList.get(index).printMenuItems();
+        menuList.get(index).printMenuItems();
 
         Scanner sc = new Scanner(System.in);
         String selectedMenuItem = sc.next();
         try {
             if ("0".equals(selectedMenuItem)) return;
             int selectedMenuItemNumber = Integer.parseInt(selectedMenuItem);
-            int menuItemsCount = this.menuList.get(index).getMenuItems().size();
+            int menuItemsCount = menuList.get(index).getMenuItems().size();
             if (selectedMenuItemNumber > 0 && selectedMenuItemNumber <= menuItemsCount) {
                 // menuItems 중 선택된 menuItem 출력
-                this.menuList.get(index).printSelectedMenuItem(selectedMenuItemNumber - 1);
+                menuList.get(index).printSelectedMenuItem(selectedMenuItemNumber - 1);
             } else {
                 throw new InvalidMenuSelectionException(0, menuItemsCount);
             }

@@ -88,7 +88,7 @@ public class Kiosk {
             int menuItemsCount = menuList.get(index).getMenuItems().size();
             if (selectedMenuItemNumber > 0 && selectedMenuItemNumber <= menuItemsCount) {
                 // menuItems 중 선택된 menuItem 출력
-                this.menuList.get(index).printSelectedMenuItem(selectedMenuItemNumber - 1);
+                menuList.get(index).printSelectedMenuItem(selectedMenuItemNumber - 1);
                 // 해당 item 장바구니에 담기
                 startAddToCart(menuList.get(index).getMenuItem(selectedMenuItemNumber - 1));
             } else {
