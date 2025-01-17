@@ -183,9 +183,11 @@ src
 메뉴 담기
 <br>
 ![Image](https://github.com/user-attachments/assets/118a4407-08fc-4120-af7d-bc99803114a2)
+<br>
 메뉴 담기 취소
 <br>
 ![Image](https://github.com/user-attachments/assets/f14d1c9a-a037-41c2-8f82-cc6e80648593)
+<br>
 품절된 메뉴 담기
 <br>
 ![Image](https://github.com/user-attachments/assets/5f9b7852-50ef-4927-87f6-c1e7da5ac47c)
@@ -194,9 +196,11 @@ src
 장바구니 확인: 장바구니에 담긴 메뉴와 합계 금액 출력
 <br>
 ![Image](https://github.com/user-attachments/assets/f4365f9c-4ee9-4c19-8566-5a7b702ddd5d)
+<br>
 장바구니 취소: 장바구니 비우기
 <br>
 ![Image](https://github.com/user-attachments/assets/58cb0d60-d132-42fb-ba1c-833dee7e1fd0)
+<br>
 장바구니에 담은 메뉴가 품절된 경우: 품절된 메뉴 삭제
 <br>
 ![Image](https://github.com/user-attachments/assets/71bc05ac-43f6-4351-928f-2d55358a0ac7)
