@@ -5,8 +5,9 @@
 ## 📖 Project Overview
 Java 문법 실습과 객체 지향 개념을 적용해 키오스크를 구현한 프로젝트입니다.
 <br>
+[_✏️키오스크 필수 기능 회고_](https://mannakingdom.tistory.com/103)
 <br>
-[_✏️프로젝트 회고_](https://mannakingdom.tistory.com)
+[_✏️키오스크 도전 기능 회고_](https://mannakingdom.tistory.com/105)
 
 ---
 
