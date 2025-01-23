@@ -1,0 +1,40 @@
+/* ===== 나눔 스퀘어 ===== */
+@import url("https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css");
+* {
+  font-family: "NanumSquare", sans-serif;
+}
+
+/* ===== wrap ===== */
+.wrap {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===== navbar ===== */
+.navbar {
+  z-index: 100;
+}
+
+/* ===== hero_section ===== */
+.img_box {
+  width: 30%;
+  height: 300px;
+  margin: 30px auto;
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* ===== team_section ===== */
+.team_section .card-body {
+  height: 240px;
+}
+
+/* ===== member_section ===== */
+.member_section img {
+  width: 100%;
+  height: 225px;
+}
