@@ -1,15 +1,12 @@
 package com.example.layered.entity;
 
-import com.example.layered.dto.MemoRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @AllArgsConstructor
 public class Memo {
 
-    @Setter // id만 setter를 만들어줌
     private Long id;
     private String title;
     private String contents;
