@@ -18,9 +18,9 @@ public class MemberService {    // 확장될 가능성이 없다면 Interface가
 
     private final MemberRepository memberRepository;
 
-    public SignUpResponseDto signUp(String username, String password, Integer age) {
+    public SignUpResponseDto signUp(String userName, String password, Integer age) {
 
-        Member member = new Member(username, password, age);
+        Member member = new Member(userName, password, age);
 
         Member savedMember = memberRepository.save(member);
 

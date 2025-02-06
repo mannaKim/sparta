@@ -21,7 +21,7 @@ public class MemberController {
     public ResponseEntity<SignUpResponseDto> signUp(@RequestBody SignUpRequestDto requestDto) {
 
         SignUpResponseDto signUpResponseDto = memberService.signUp(
-                requestDto.getUsername(),
+                requestDto.getUserName(),
                 requestDto.getPassword(),
                 requestDto.getAge()
         );

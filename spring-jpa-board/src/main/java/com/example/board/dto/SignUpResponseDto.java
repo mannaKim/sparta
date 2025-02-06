@@ -7,13 +7,13 @@ public class SignUpResponseDto {
 
     private final Long id;
 
-    private final String username;
+    private final String userName;
 
     private final Integer age;
 
-    public SignUpResponseDto(Long id, String username, Integer age) {
+    public SignUpResponseDto(Long id, String userName, Integer age) {
         this.id = id;
-        this.username = username;
+        this.userName = userName;
         this.age = age;
     }
 }

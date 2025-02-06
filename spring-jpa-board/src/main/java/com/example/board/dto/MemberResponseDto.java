@@ -5,12 +5,12 @@ import lombok.Getter;
 @Getter
 public class MemberResponseDto {
 
-    private final String username;
+    private final String userName;
 
     private final Integer age;
 
-    public MemberResponseDto(String username, Integer age) {
-        this.username = username;
+    public MemberResponseDto(String userName, Integer age) {
+        this.userName = userName;
         this.age = age;
     }
 }
