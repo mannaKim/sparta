@@ -1,8 +1,8 @@
 package com.example.board.controller;
 
-import com.example.board.dto.BoardResponseDto;
-import com.example.board.dto.BoardWithAgeResponseDto;
-import com.example.board.dto.CreateBoardRequestDto;
+import com.example.board.dto.board.BoardResponseDto;
+import com.example.board.dto.board.BoardWithAgeResponseDto;
+import com.example.board.dto.board.CreateBoardRequestDto;
 import com.example.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

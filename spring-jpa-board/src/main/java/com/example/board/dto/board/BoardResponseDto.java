@@ -1,4 +1,4 @@
-package com.example.board.dto;
+package com.example.board.dto.board;
 
 import com.example.board.entity.Board;
 import lombok.Getter;

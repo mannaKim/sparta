@@ -1,7 +1,7 @@
 package com.example.board.service;
 
-import com.example.board.dto.BoardResponseDto;
-import com.example.board.dto.BoardWithAgeResponseDto;
+import com.example.board.dto.board.BoardResponseDto;
+import com.example.board.dto.board.BoardWithAgeResponseDto;
 import com.example.board.entity.Board;
 import com.example.board.entity.Member;
 import com.example.board.repository.BoardRepository;
