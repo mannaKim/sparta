@@ -1,5 +1,6 @@
 package com.example.springadvanced.controller;
 
+import com.example.springadvanced.entity.Person;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,4 +29,9 @@ public class TypeConverterController {
         log.info("example = {}", example);
     }
 
+    @GetMapping("/type-converter")
+    public void typeConverter(@RequestParam Person person) {
+        log.info("person.getName() = {}", person.getName());
+        log.info("person.getAge() = {}", person.getAge());
+    }
 }
